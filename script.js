@@ -115,6 +115,7 @@ window.initMap = function () {
 
   // Create a div element with an id of "spinner"
   const spinner = document.getElementById("spinner");
+
   // Hide the div by default once the script has loaded
   spinner.style.display = "none";
 
@@ -129,7 +130,10 @@ window.initMap = function () {
     // Check if the input is not empty
     if (!postcode) return;
 
-    // Show the spinner before making the API call
+    // Clear the table body
+    resultsTable.tBodies[0].innerHTML = "";
+
+    // Show the spinner
     spinner.style.display = "flex";
 
     // Create an array of origins with only the input value
@@ -175,9 +179,6 @@ window.initMap = function () {
 
       // Sort the locations array by distance in ascending order
       locations.sort((a, b) => a.distance?.value - b.distance?.value);
-
-      // Clear the table body
-      resultsTable.tBodies[0].innerHTML = "";
 
       // Loop through the sorted locations array and create a table row for each location object
       for (const location of locations) {
