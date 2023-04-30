@@ -16,7 +16,7 @@ const locations = [
     postcode: "B5 7QU",
     url: "https://www.field-studies-council.org/locations/fsc-birmingham/",
   },
-  { 
+  {
     name: "Bishops Wood",
     postcode: "DY13 9SE",
     url: "https://www.field-studies-council.org/locations/bishops-wood/",

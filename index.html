@@ -1,65 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-          content="Enter a postcode to find the distance and travel time to every Field Studies Council field centre.">
-    <meta name="keywords"
-          content="field studies, distance calculator, postcode, field centre, travel time">
-    <title>Field Studies Council Centre Distance Calculator</title>
-    <style>
-      * {
-        font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif; 
-        box-sizing: border-box;
-      }
 
-      body {
-        max-width: 50em;
-        margin: 1rem auto;
-        padding: 1rem;
-      }
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Enter a postcode to find the distance and travel time to every Field Studies Council field centre.">
+  <meta name="keywords" content="field studies, distance calculator, postcode, field centre, travel time">
+  <title>Field Studies Council Centre Distance Calculator</title>
+  <style>
+    * {
+      font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
+      box-sizing: border-box;
+    }
 
-      a {
-        color: #0a7e66
-      }
+    body {
+      max-width: 50em;
+      margin: 1rem auto;
+      padding: 1rem;
+    }
 
-      /* Add some style to the input and table elements */
-      input, button {
-        width: 200px;
-        font-size: 20px;
-        border-radius: 0%;
-      }
+    a {
+      color: #0a7e66
+    }
 
-      input {
-        padding: .1em .5em;
-        margin-right: .5em;
-        text-align: center;
-      }
+    /* Add some style to the input and table elements */
+    input,
+    button {
+      width: 200px;
+      font-size: 20px;
+      border-radius: 0%;
+    }
 
-      input:focus, button:focus {
-        outline: 5px solid #0a7e66;
-        border-color: transparent;
-      }
+    input {
+      padding: .1em .5em;
+      margin-right: .5em;
+      text-align: center;
+    }
 
-      input::placeholder {
-        text-align: center;
-      }
+    input:focus,
+    button:focus {
+      outline: 5px solid #0a7e66;
+      border-color: transparent;
+    }
 
+    input::placeholder {
+      text-align: center;
+    }
+
+    .table-container {
+      width: 100%;
+      position: relative;
+    }
+
+    @media (max-width: 500px) {
       .table-container {
-        width: 100%;
         position: relative;
+        overflow-x: auto;
       }
+    }
 
-      @media (max-width: 500px) {
-        .table-container {
-          position: relative;
-          overflow-x: auto;
-        }
-      }
-
-      /* .table-container::after {
+    /* .table-container::after {
         content: "";
         position: absolute;
         top: 0;
@@ -70,93 +71,89 @@
         background-attachment: fixed;
       } */
 
-      table {
-        border-collapse: collapse;
-        margin-top: 20px;
-        width: 100%;
-      }
+    table {
+      border-collapse: collapse;
+      margin-top: 20px;
+      width: 100%;
+    }
 
-      th,
-      td {
-        border: 1px solid black;
-        padding: .25em;
-      }
+    th,
+    td {
+      border: 1px solid black;
+      padding: .25em;
+    }
 
-      th > button {
-        width: 100%;
-        height: initial;
-        border: 0;
-        background-color: transparent;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        font-weight: bold;
-        white-space: nowrap;
-      }
+    th>button {
+      width: 100%;
+      height: initial;
+      border: 0;
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: bold;
+      white-space: nowrap;
+    }
 
-      th > button:hover {
-        color: #0a7e66;
-      }
+    th>button:hover {
+      color: #0a7e66;
+    }
 
-        /* Style the sort icons */
-      .sort-icon {
-        position: relative;
-        font-size: small;
-        /* display: none; */
-        opacity: 0;
-      }
+    /* Style the sort icons */
+    .sort-icon {
+      position: relative;
+      font-size: small;
+      /* display: none; */
+      opacity: 0;
+    }
 
-      /* Show the sort icon when the header is sorted */
-      .sorted .sort-icon {
-        /* display: inline; */
-        opacity: .5;
-      }
+    /* Show the sort icon when the header is sorted */
+    .sorted .sort-icon {
+      /* display: inline; */
+      opacity: .5;
+    }
 
-      th svg {
-        width: 1em;
-      }
+    th svg {
+      width: 1em;
+    }
 
-      .inputs {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
+    .inputs {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-      .intro {
-        text-align: center;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="intro">
-      <img src="fsc-logo-black-rgb.svg" alt="" width="200">
-      <p>
-        Enter a postcode to get a list of <a href="https://www.field-studies-council.org/centres/" _target="blank">Field Studies Council locations</a>
-        ordered by distance.
-      </p>
-      <p>
-        Click or tap the column headers to sort the table. Travel time is best
-        guess based on Google road and traffic data, and based on travelling by
-        car.
-      </p>
-    </div>
-    <div class="inputs">
-      <input id="postcode" type="text" placeholder="Enter a postcode" />
-      <button id="request" type="button">Get Distances</button>
-    </div>
-    <div class="table-container">
-      <table id="results">
-        <thead>
-          <tr>
-            <th>
-              <button>
-                Centre <span class="sort-icon">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     fill="none"
-                     viewBox="0 0 24 24"
-                     stroke-width="1.5"
-                     stroke="currentColor"
-                     class="w-6 h-6">
+    .intro {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="intro">
+    <img src="fsc-logo-black-rgb.svg" alt="" width="200">
+    <p>
+      Enter a postcode to get a list of <a href="https://www.field-studies-council.org/centres/" _target="blank">Field Studies Council locations</a>
+      ordered by distance.
+    </p>
+    <p>
+      Click or tap the column headers to sort the table. Travel time is best
+      guess based on Google road and traffic data, and based on travelling by
+      car.
+    </p>
+  </div>
+  <div class="inputs">
+    <input id="postcode" type="text" placeholder="Enter a postcode" />
+    <button id="request" type="button">Get Distances</button>
+  </div>
+  <div class="table-container">
+    <table id="results">
+      <thead>
+        <tr>
+          <th>
+            <button>
+              Centre <span class="sort-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12" />
                 </svg>
               </span>
@@ -165,56 +162,42 @@
           <th>
             <button>
               Postcode <span class="sort-icon">
-              <svg xmlns="http://www.w3.org/2000/svg"
-                   fill="none"
-                   viewBox="0 0 24 24"
-                   stroke-width="1.5"
-                   stroke="currentColor"
-                   class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12" />
-              </svg>
-            </span>
-          </button>
-        </th>
-        <th class="sorted">
-          <button>
-            Distance <span class="sort-icon">
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 fill="none"
-                 viewBox="0 0 24 24"
-                 stroke-width="1.5"
-                 stroke="currentColor"
-                 class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12" />
-            </svg>
-          </span>
-        </button>
-      </th>
-      <th>
-        <button>
-          Travel time <span class="sort-icon">
-          <svg xmlns="http://www.w3.org/2000/svg"
-               fill="none"
-               viewBox="0 0 24 24"
-               stroke-width="1.5"
-               stroke="currentColor"
-               class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12" />
-          </svg>
-        </span>
-      </button>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12" />
+                </svg>
+              </span>
+            </button>
+          </th>
+          <th class="sorted">
+            <button>
+              Distance <span class="sort-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12" />
+                </svg>
+              </span>
+            </button>
+          </th>
+          <th>
+            <button>
+              Travel time <span class="sort-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12" />
+                </svg>
+              </span>
+            </button>
           </th>
         </tr>
       </thead>
       <tbody>
         <!-- The table body will be populated by JavaScript -->
       </tbody>
-      </table>
-</div>
-<!-- Load the Maps JavaScript API -->
-<!-- <script src="https://google-maps-proxy.fsc-digital.workers.dev/"></script> -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOeOAjAuHro9ZiUFRD9FpHZPqtbxRc2xc"></script>
-<!-- Link the script.js file to the HTML file -->
-<script src="script.js"></script>
+    </table>
+  </div>
+  <!-- Load the Maps JavaScript API -->
+  <!-- <script src="https://google-maps-proxy.fsc-digital.workers.dev/"></script> -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOeOAjAuHro9ZiUFRD9FpHZPqtbxRc2xc"></script>
+  <!-- Link the script.js file to the HTML file -->
+  <script src="script.js"></script>
 </body>
+
 </html>
