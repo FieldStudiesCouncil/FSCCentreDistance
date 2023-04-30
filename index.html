@@ -27,9 +27,10 @@
     /* Add some style to the input and table elements */
     input,
     button {
-      width: 200px;
+      width: 250px;
       font-size: 20px;
       border-radius: 0%;
+      white-space: nowrap;
     }
 
     input {
@@ -126,6 +127,18 @@
     .intro {
       text-align: center;
     }
+
+    #spinner {
+      background-image: linear-gradient(rgba(255, 255, 255, .75), rgba(255, 255, 255, .75)), url('spinner.svg');
+      background-repeat: no-repeat;
+      height: 3em;
+      background-position: center center;
+      display: flex;
+      align-items: end;
+      justify-content: center;
+      font-size: small;
+      font-weight: bold;
+    }
   </style>
 </head>
 
@@ -133,7 +146,7 @@
   <div class="intro">
     <img src="fsc-logo-black-rgb.svg" alt="" width="200">
     <p>
-      Enter a postcode to get a list of <a href="https://www.field-studies-council.org/centres/" _target="blank">Field Studies Council locations</a>
+      Enter a place, address, or postcode to get a list of <a href="https://www.field-studies-council.org/centres/" _target="blank">Field Studies Council locations</a>
       ordered by distance.
     </p>
     <p>
@@ -143,7 +156,7 @@
     </p>
   </div>
   <div class="inputs">
-    <input id="postcode" type="text" placeholder="Enter a postcode" />
+    <input id="postcode" type="text" placeholder="Enter place or postcode" />
     <button id="request" type="button">Get Distances</button>
   </div>
   <div class="table-container">
@@ -188,10 +201,11 @@
           </th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="table-body">
         <!-- The table body will be populated by JavaScript -->
       </tbody>
     </table>
+    <div id="spinner"><p>LOADING…</p></div>
   </div>
   <!-- Link the script.js file to the HTML file -->
   <script src="script.js"></script>

@@ -2,11 +2,10 @@
 var script = document.createElement("script");
 script.src =
   "https://maps.googleapis.com/maps/api/js?key=AIzaSyAOeOAjAuHro9ZiUFRD9FpHZPqtbxRc2xc&callback=initMap";
-script.async = true;
+script.async = false;
 
 // Attach your callback function to the `window` object
 window.initMap = function () {
-  // Define an array of locations with their names and postcodes
   const locations = [
     {
       name: "Amersham",
@@ -114,6 +113,11 @@ window.initMap = function () {
   const postcodeInput = document.getElementById("postcode");
   const resultsTable = document.getElementById("results");
 
+  // Create a div element with an id of "spinner"
+  const spinner = document.getElementById("spinner");
+  // Hide the div by default once the script has loaded
+  spinner.style.display = "none";
+
   // Create a new DistanceMatrixService object
   const distanceMatrixService = new google.maps.DistanceMatrixService();
 
@@ -124,6 +128,9 @@ window.initMap = function () {
 
     // Check if the input is not empty
     if (!postcode) return;
+
+    // Show the spinner before making the API call
+    spinner.style.display = "flex";
 
     // Create an array of origins with only the input value
     const origins = [postcode];
@@ -142,7 +149,10 @@ window.initMap = function () {
     // Call the getDistanceMatrix method with the request and a callback function
     distanceMatrixService.getDistanceMatrix(request, (response, status) => {
       // Check if the status is OK; if not, return
-      if (status != "OK") return;
+      if (status != "OK") {
+        spinner.style.display = none;
+        return;
+      }
 
       // Get the array of DistanceMatrixRows from the response
       // https://developers.google.com/maps/documentation/distance-matrix/distance-matrix#DistanceMatrixRow
@@ -201,6 +211,9 @@ window.initMap = function () {
 
         // Append the table row element to the table body element
         resultsTable.tBodies[0].appendChild(tr);
+
+        // Hide the spinner after displaying the results
+        spinner.style.display = "none";
       }
     });
   });
