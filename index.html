@@ -17,7 +17,12 @@
 
       body {
         max-width: 50em;
-        margin: 1em auto;
+        margin: 1rem auto;
+        padding: 1rem;
+      }
+
+      a {
+        color: #0a7e66
       }
 
       /* Add some style to the input and table elements */
@@ -42,6 +47,29 @@
         text-align: center;
       }
 
+      .table-container {
+        width: 100%;
+        position: relative;
+      }
+
+      @media (max-width: 500px) {
+        .table-container {
+          position: relative;
+          overflow-x: auto;
+        }
+      }
+
+      /* .table-container::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 2rem;
+        background: linear-gradient(to right, transparent, white);
+        background-attachment: fixed;
+      } */
+
       table {
         border-collapse: collapse;
         margin-top: 20px;
@@ -63,6 +91,7 @@
         align-items: center;
         justify-content: space-between;
         font-weight: bold;
+        white-space: nowrap;
       }
 
       th > button:hover {
@@ -102,7 +131,7 @@
     <div class="intro">
       <img src="fsc-logo-black-rgb.svg" alt="" width="200">
       <p>
-        Enter a postcode to get a list of Field Studies Council locations
+        Enter a postcode to get a list of <a href="https://www.field-studies-council.org/centres/" _target="blank">Field Studies Council locations</a>
         ordered by distance.
       </p>
       <p>
@@ -115,12 +144,27 @@
       <input id="postcode" type="text" placeholder="Enter a postcode" />
       <button id="request" type="button">Get Distances</button>
     </div>
-    <table id="results">
-      <thead>
-        <tr>
+    <div class="table-container">
+      <table id="results">
+        <thead>
+          <tr>
+            <th>
+              <button>
+                Centre <span class="sort-icon">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke-width="1.5"
+                     stroke="currentColor"
+                     class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12" />
+                </svg>
+              </span>
+            </button>
+          </th>
           <th>
             <button>
-              Centre <span class="sort-icon">
+              Postcode <span class="sort-icon">
               <svg xmlns="http://www.w3.org/2000/svg"
                    fill="none"
                    viewBox="0 0 24 24"
@@ -132,9 +176,9 @@
             </span>
           </button>
         </th>
-        <th>
+        <th class="sorted">
           <button>
-            Postcode <span class="sort-icon">
+            Distance <span class="sort-icon">
             <svg xmlns="http://www.w3.org/2000/svg"
                  fill="none"
                  viewBox="0 0 24 24"
@@ -146,9 +190,9 @@
           </span>
         </button>
       </th>
-      <th class="sorted">
+      <th>
         <button>
-          Distance <span class="sort-icon">
+          Travel time <span class="sort-icon">
           <svg xmlns="http://www.w3.org/2000/svg"
                fill="none"
                viewBox="0 0 24 24"
@@ -159,27 +203,14 @@
           </svg>
         </span>
       </button>
-    </th>
-    <th>
-      <button>
-        Travel time <span class="sort-icon">
-        <svg xmlns="http://www.w3.org/2000/svg"
-             fill="none"
-             viewBox="0 0 24 24"
-             stroke-width="1.5"
-             stroke="currentColor"
-             class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12" />
-        </svg>
-      </span>
-    </button>
-  </th>
-</tr>
-</thead>
-<tbody>
-  <!-- The table body will be populated by JavaScript -->
-</tbody>
-</table>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- The table body will be populated by JavaScript -->
+      </tbody>
+      </table>
+</div>
 <!-- Load the Maps JavaScript API -->
 <script src="https://google-maps-proxy.fsc-digital.workers.dev/"></script>
 <!-- Link the script.js file to the HTML file -->
