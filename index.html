@@ -12,6 +12,7 @@
     <style>
       * {
         font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif; 
+        box-sizing: border-box;
       }
 
       body {
@@ -23,11 +24,18 @@
       input, button {
         width: 200px;
         font-size: 20px;
+        border-radius: 0%;
       }
 
       input {
         padding: .1em .5em;
         margin-right: .5em;
+
+      }
+
+      input:focus, button:focus {
+        outline: 5px solid #0a7e66;
+        border-color: transparent;
       }
 
       table {
@@ -51,6 +59,10 @@
         align-items: center;
         justify-content: space-between;
         font-weight: bold;
+      }
+
+      th > button:hover {
+        color: #0a7e66;
       }
 
         /* Style the sort icons */
@@ -78,7 +90,6 @@
       }
     </style>
   </head>
-  
   <body>
     <div class="intro">
       <p>
