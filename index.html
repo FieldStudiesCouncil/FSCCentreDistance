@@ -160,7 +160,7 @@
     </p>
   </div>
   <div class="inputs">
-    <input id="postcode" type="text" placeholder="Enter place or postcode" />
+    <input id="postcode" type="text" autocomplete="off" placeholder="Enter place or postcode" />
     <button id="request" type="button">Get Distances</button>
   </div>
   <div class="table-container">
@@ -209,7 +209,9 @@
         <!-- The table body will be populated by JavaScript -->
       </tbody>
     </table>
-    <div id="spinner"><p>LOADING…</p></div>
+    <div id="spinner">
+      <p>LOADING…</p>
+    </div>
   </div>
   <!-- Link the script.js file to the HTML file -->
   <script src="script.js"></script>
