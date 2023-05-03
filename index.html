@@ -31,16 +31,25 @@
     /* Add some style to the input and table elements */
     input,
     button {
-      width: 250px;
+      /* width: 250px; */
       font-size: 20px;
       border-radius: 0%;
       white-space: nowrap;
+      flex: 1;
     }
 
     input {
-      padding: .1em .5em;
-      margin-right: .5em;
+      padding: .1em 0 .1em 0.5em;
       text-align: center;
+      border: 2px solid black;
+      min-width: 5em;
+      flex: 3;
+    }
+
+    .inputs {
+      display: flex;
+      gap: .5em;
+      width: 100%;
     }
 
     input:focus,
@@ -64,17 +73,6 @@
         overflow-x: auto;
       }
     }
-
-    /* .table-container::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        width: 2rem;
-        background: linear-gradient(to right, transparent, white);
-        background-attachment: fixed;
-      } */
 
     table {
       border-collapse: collapse;
@@ -108,13 +106,11 @@
     .sort-icon {
       position: relative;
       font-size: small;
-      /* display: none; */
       opacity: 0;
     }
 
     /* Show the sort icon when the header is sorted */
     .sorted .sort-icon {
-      /* display: inline; */
       opacity: .5;
     }
 
@@ -122,26 +118,27 @@
       width: 1em;
     }
 
-    .inputs {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
     .intro {
       text-align: center;
     }
 
-    #spinner {
+    #spinner, #no-data {
       background-image: linear-gradient(rgba(255, 255, 255, .75), rgba(255, 255, 255, .75)), url('spinner.svg');
       background-repeat: no-repeat;
-      height: 3em;
+      padding: 1em;
       background-position: center center;
       display: flex;
       align-items: end;
       justify-content: center;
       font-size: small;
       font-weight: bold;
+      width: 100%;
+      text-align: center;
+    }
+
+    #no-data {
+      background-image: none;
+      display: none;
     }
   </style>
 </head>
@@ -185,7 +182,7 @@
               </span>
             </button>
           </th>
-          <th class="sorted">
+          <th>
             <button>
               Distance <span class="sort-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -194,7 +191,7 @@
               </span>
             </button>
           </th>
-          <th>
+          <th class="sorted">
             <button>
               Travel time <span class="sort-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -209,9 +206,12 @@
         <!-- The table body will be populated by JavaScript -->
       </tbody>
     </table>
-    <div id="spinner">
-      <p>LOADING…</p>
-    </div>
+  </div>
+  <div id="spinner">
+    <p>LOADING…</p>
+  </div>
+  <div id="no-data">
+    <p>NO DATA – ENTER A PLACE OR POSTCODE</p>
   </div>
   <!-- Link the script.js file to the HTML file -->
   <script src="script.js"></script>

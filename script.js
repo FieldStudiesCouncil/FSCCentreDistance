@@ -115,9 +115,11 @@ window.initMap = function () {
 
   // Create a div element with an id of "spinner"
   const spinner = document.getElementById("spinner");
+  const nodata = document.getElementById("no-data");
 
   // Hide the div by default once the script has loaded
   spinner.style.display = "none";
+  nodata.style.display = "flex";
 
   // Create a new DistanceMatrixService object
   const distanceMatrixService = new google.maps.DistanceMatrixService();
@@ -135,6 +137,7 @@ window.initMap = function () {
 
     // Show the spinner
     spinner.style.display = "flex";
+    nodata.style.display = "none";
 
     // Create an array of origins with only the input value
     const origins = [postcode];
@@ -155,6 +158,7 @@ window.initMap = function () {
       // Check if the status is OK; if not, return
       if (status != "OK") {
         spinner.style.display = none;
+        nodata.style.display = flex;
         return;
       }
 
@@ -178,7 +182,7 @@ window.initMap = function () {
       }
 
       // Sort the locations array by distance in ascending order
-      locations.sort((a, b) => a.distance?.value - b.distance?.value);
+      locations.sort((a, b) => a.duration?.value - b.duration?.value);
 
       // Loop through the sorted locations array and create a table row for each location object
       for (const location of locations) {
@@ -215,6 +219,7 @@ window.initMap = function () {
 
         // Hide the spinner after displaying the results
         spinner.style.display = "none";
+        nodata.style.display = "none";
       }
     });
   });
