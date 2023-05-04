@@ -1,5 +1,5 @@
 // Create the script tag, set the appropriate attributes
-var script = document.createElement("script");
+const script = document.createElement("script");
 script.src =
   "https://maps.googleapis.com/maps/api/js?key=AIzaSyAOeOAjAuHro9ZiUFRD9FpHZPqtbxRc2xc&callback=initMap";
 script.async = true;
@@ -111,6 +111,11 @@ window.initMap = function () {
 
   // Get the input and table elements by their IDs
   const postcodeInput = document.getElementById("postcode");
+  postcodeInput.disabled = false;
+
+  const getDistancesButton = document.getElementById("request");
+  getDistancesButton.disabled = false;
+
   const resultsTable = document.getElementById("results");
 
   // Create a div element with an id of "spinner"
@@ -125,7 +130,7 @@ window.initMap = function () {
   const distanceMatrixService = new google.maps.DistanceMatrixService();
 
   // Add an event listener to the input element to handle changes
-  postcodeInput.addEventListener("change", () => {
+  getDistancesButton.addEventListener("click", () => {
     // Get the value of the input element
     const postcode = postcodeInput.value;
 
@@ -309,6 +314,67 @@ window.initMap = function () {
       flags.set(header, !ascending);
     }
   });
+
+  // Create a geocoder object
+  const geocoder = new google.maps.Geocoder();
+  const marker = document.querySelector(".marker");
+
+  // Get the current location using the Geolocation API
+  async function getCurrentLocation() {
+    try {
+      // Animate the marker to indicate geocoding in progress
+      marker.classList.add("marker-animate");
+      // Let the user know we're geocoding
+      postcodeInput.value = "";
+      postcodeInput.placeholder = "Finding location...";
+      // Disable input
+      postcodeInput.disabled = true;
+      // Get the position object using a promise
+      const position = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+      });
+      // Get the latitude and longitude from the position object
+      let { latitude: lat, longitude: lng } = position.coords;
+      // Create a LatLng object
+      let latlng = new google.maps.LatLng(lat, lng);
+      // Geocode the LatLng object and display the result
+      geocodeLatLng(latlng);
+    } catch (error) {
+      // Handle errors
+      alert(error.message);
+      marker.classList.remove("marker-animate");
+      postcodeInput.placeholder = "Enter place or postcode";
+      postcodeInput.disabled = false;
+    }
+  }
+
+  // Geocode a LatLng object and display the result
+  async function geocodeLatLng(latlng) {
+    // Use the geocoder object to reverse geocode the LatLng object
+    geocoder.geocode({ location: latlng }, (results, status) => {
+      if (status === "OK") {
+        if (results[0]) {
+          // Display the formatted address of the first result using template literals
+          console.log(`Your location is: ${results[0].formatted_address}`);
+          // Put the geocoded address into the input
+          postcodeInput.value = results[0].formatted_address;
+          // Reenable the input
+          postcodeInput.disabled = false;
+          // Remove the animation
+          marker.classList.remove("marker-animate");
+        }
+      } else {
+        // Geocoder failed
+        marker.classList.remove("marker-animate");
+        alert(`Geocoder failed due to: ${status}`);
+      }
+    });
+  }
+
+  // Add an event listener to the button with a class of .marker
+  document
+    .querySelector(".marker")
+    .addEventListener("click", getCurrentLocation);
 };
 
 // Append the 'script' element to 'head'

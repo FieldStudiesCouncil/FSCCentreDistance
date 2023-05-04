@@ -8,157 +8,34 @@
   <meta name="description" content="Enter a postcode to find the distance and travel time to every Field Studies Council field centre.">
   <meta name="keywords" content="field studies, distance calculator, postcode, field centre, travel time">
   <title>Field Studies Council Centre Distance Calculator</title>
-  <style>
-    * {
-      font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
-      box-sizing: border-box;
-    }
-
-    html {
-      overflow-y: scroll;
-    }
-
-    body {
-      max-width: 50em;
-      margin: 1rem auto;
-      padding: 1rem;
-    }
-
-    a {
-      color: #0a7e66
-    }
-
-    /* Add some style to the input and table elements */
-    input,
-    button {
-      /* width: 250px; */
-      font-size: 20px;
-      border-radius: 0%;
-      white-space: nowrap;
-      flex: 1;
-    }
-
-    input {
-      padding: .1em 0 .1em 0.5em;
-      text-align: center;
-      border: 2px solid black;
-      min-width: 5em;
-      flex: 3;
-    }
-
-    .inputs {
-      display: flex;
-      gap: .5em;
-      width: 100%;
-    }
-
-    input:focus,
-    button:focus {
-      outline: 5px solid #0a7e66;
-      border-color: transparent;
-    }
-
-    input::placeholder {
-      text-align: center;
-    }
-
-    .table-container {
-      width: 100%;
-      position: relative;
-    }
-
-    @media (max-width: 500px) {
-      .table-container {
-        position: relative;
-        overflow-x: auto;
-      }
-    }
-
-    table {
-      border-collapse: collapse;
-      margin-top: 20px;
-      width: 100%;
-    }
-
-    th,
-    td {
-      border: 1px solid black;
-      padding: .25em;
-    }
-
-    th>button {
-      width: 100%;
-      height: initial;
-      border: 0;
-      background-color: transparent;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-weight: bold;
-      white-space: nowrap;
-    }
-
-    th>button:hover {
-      color: #0a7e66;
-    }
-
-    /* Style the sort icons */
-    .sort-icon {
-      position: relative;
-      font-size: small;
-      opacity: 0;
-    }
-
-    /* Show the sort icon when the header is sorted */
-    .sorted .sort-icon {
-      opacity: .5;
-    }
-
-    th svg {
-      width: 1em;
-    }
-
-    .intro {
-      text-align: center;
-    }
-
-    #spinner, #no-data {
-      background-image: linear-gradient(rgba(255, 255, 255, .75), rgba(255, 255, 255, .75)), url('spinner.svg');
-      background-repeat: no-repeat;
-      padding: 1em;
-      background-position: center center;
-      display: flex;
-      align-items: end;
-      justify-content: center;
-      font-size: small;
-      font-weight: bold;
-      width: 100%;
-      text-align: center;
-    }
-
-    #no-data {
-      background-image: none;
-      display: none;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <div class="intro">
+  <header class="intro">
     <img src="fsc-logo-black-rgb.svg" alt="" width="200">
-    <p>
-      Enter a place, address, or postcode to get a list of <a href="https://www.field-studies-council.org/centres/" _target="blank">Field Studies Council locations</a>
-      ordered by distance.
-    </p>
-    <p>
-      Click or tap the column headers to sort the table. Travel time is best
-      guess based on Google road and traffic data, and based on travelling by
-      car.
-    </p>
-  </div>
+    <h1>Centre Distance Calculator</h1>
+    <details>
+      <summary>Instructions</summary>
+      <ol>
+        <li>Enter a place or click the pin to try and find your current location</li>
+        <li>Click the <strong>Get Distances</strong> button</li>
+        <li>Click or tap the column headers to sort the table.</li>
+      </ol>
+      <p>
+        Travel time is best guess based on Google road and current traffic data, and based
+        on travelling by car.
+      </p>
+    </details>
+  </header>
   <div class="inputs">
-    <input id="postcode" type="text" autocomplete="off" placeholder="Enter place or postcode" />
-    <button id="request" type="button">Get Distances</button>
+    <button class="marker">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+        <path fill="currentColor" fill-rule="evenodd" d="m11.54 22.35.07.04.03.02a.76.76 0 0 0 .72 0l.03-.02.07-.04a16.98 16.98 0 0 0 1.14-.74 19.58 19.58 0 0 0 2.69-2.28c1.94-2 3.96-4.98 3.96-8.83a8.25 8.25 0 0 0-16.5 0c0 3.85 2.02 6.84 3.96 8.83a19.58 19.58 0 0 0 2.69 2.28 16.98 16.98 0 0 0 1.14.74zM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" clip-rule="evenodd" />
+      </svg>
+    </button>
+    <input id="postcode" type="text" autocomplete="off" placeholder="Enter place or postcode" disabled>
+    <button id="request" type="button" disabled>Get Distances</button>
   </div>
   <div class="table-container">
     <table id="results">
@@ -208,7 +85,7 @@
     </table>
   </div>
   <div id="spinner">
-    <p>LOADING…</p>
+    <p>LOADING</p>
   </div>
   <div id="no-data">
     <p>NO DATA – ENTER A PLACE OR POSTCODE</p>
