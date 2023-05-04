@@ -33,6 +33,7 @@ details {
 
 .inputs {
   display: flex;
+	flex-wrap: wrap;
   gap: 0.25em;
   width: 100%;
 }
@@ -81,6 +82,10 @@ input::placeholder {
     position: relative;
     overflow-x: auto;
   }
+
+	button#request {
+		flex-basis: 100%;
+	}
 }
 
 table {
