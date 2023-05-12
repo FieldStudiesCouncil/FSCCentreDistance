@@ -2,95 +2,95 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Enter a postcode to find the distance and travel time to every Field Studies Council field centre.">
-  <meta name="keywords" content="field studies, distance calculator, postcode, field centre, travel time">
-  <title>Field Studies Council Centre Distance Calculator</title>
-  <link rel="stylesheet" href="style.css">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Enter a postcode to find the distance and travel time to every Field Studies Council field centre.">
+	<meta name="keywords" content="field studies, distance calculator, postcode, field centre, travel time">
+	<title>Field Studies Council Centre Distance Calculator</title>
+	<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <header class="intro">
-    <img src="fsc-logo-black-rgb.svg" alt="" width="200">
-    <h1>Centre Distance Calculator</h1>
-    <details>
-      <summary>Instructions</summary>
-      <ol>
-        <li>Enter a place or click the pin to try and find your current location</li>
-        <li>Click the <strong>Get Distances</strong> button</li>
-        <li>Click or tap the column headers to sort the table.</li>
-      </ol>
-      <p>
-        Travel based on Google road and traffic data, and assumes travelling by car.
-      </p>
-    </details>
-  </header>
-  <div class="inputs">
-    <button class="marker">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-        <path fill="currentColor" fill-rule="evenodd" d="m11.54 22.35.07.04.03.02a.76.76 0 0 0 .72 0l.03-.02.07-.04a16.98 16.98 0 0 0 1.14-.74 19.58 19.58 0 0 0 2.69-2.28c1.94-2 3.96-4.98 3.96-8.83a8.25 8.25 0 0 0-16.5 0c0 3.85 2.02 6.84 3.96 8.83a19.58 19.58 0 0 0 2.69 2.28 16.98 16.98 0 0 0 1.14.74zM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" clip-rule="evenodd" />
-      </svg>
-    </button>
-    <input id="postcode" type="text" autocomplete="off" placeholder="Enter place or postcode" disabled>
-    <button id="request" type="button" disabled>Get Distances</button>
-  </div>
-  <div class="table-container">
-    <table id="results">
-      <thead>
-        <tr>
-          <th>
-            <button>
-              Centre <span class="sort-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12" />
-                </svg>
-              </span>
-            </button>
-          </th>
-          <th>
-            <button>
-              Postcode <span class="sort-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12" />
-                </svg>
-              </span>
-            </button>
-          </th>
-          <th>
-            <button>
-              Distance <span class="sort-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12" />
-                </svg>
-              </span>
-            </button>
-          </th>
-          <th class="sorted">
-            <button>
-              Travel time <span class="sort-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12" />
-                </svg>
-              </span>
-            </button>
-          </th>
-        </tr>
-      </thead>
-      <tbody id="table-body">
-        <!-- The table body will be populated by JavaScript -->
-      </tbody>
-    </table>
-  </div>
-  <div id="spinner">
-    <p>LOADING</p>
-  </div>
-  <div id="no-data">
-    <p>NO DATA – ENTER A PLACE OR POSTCODE</p>
-  </div>
-  <!-- Link the script.js file to the HTML file -->
-  <script src="script.js"></script>
+	<header class="intro">
+		<img src="fsc-logo-black-rgb.svg" alt="" width="200">
+		<h1>Centre Distance Calculator</h1>
+		<details>
+			<summary>Instructions</summary>
+			<ol>
+				<li>Enter a place or click the pin to try and find your current location</li>
+				<li>Click the <strong>Get Distances</strong> button</li>
+				<li>Click or tap the column headers to sort the table.</li>
+			</ol>
+			<p>
+				Travel based on Google road and traffic data, and assumes travelling by car.
+			</p>
+		</details>
+	</header>
+	<div class="inputs">
+		<button class="marker">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+				<path fill="currentColor" fill-rule="evenodd" d="m11.54 22.35.07.04.03.02a.76.76 0 0 0 .72 0l.03-.02.07-.04a16.98 16.98 0 0 0 1.14-.74 19.58 19.58 0 0 0 2.69-2.28c1.94-2 3.96-4.98 3.96-8.83a8.25 8.25 0 0 0-16.5 0c0 3.85 2.02 6.84 3.96 8.83a19.58 19.58 0 0 0 2.69 2.28 16.98 16.98 0 0 0 1.14.74zM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" clip-rule="evenodd" />
+			</svg>
+		</button>
+		<input id="postcode" type="text" autocomplete="off" placeholder="Enter place or postcode" disabled>
+		<button id="request" type="button" disabled>Get Distances</button>
+	</div>
+	<div class="table-container">
+		<table id="results">
+			<thead>
+				<tr>
+					<th>
+						<button>
+							Centre <span class="sort-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12" />
+								</svg>
+							</span>
+						</button>
+					</th>
+					<th>
+						<button>
+							Postcode <span class="sort-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12" />
+								</svg>
+							</span>
+						</button>
+					</th>
+					<th>
+						<button>
+							Distance <span class="sort-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12" />
+								</svg>
+							</span>
+						</button>
+					</th>
+					<th class="sorted">
+						<button>
+							Travel time <span class="sort-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12" />
+								</svg>
+							</span>
+						</button>
+					</th>
+				</tr>
+			</thead>
+			<tbody id="table-body">
+				<!-- The table body will be populated by JavaScript -->
+			</tbody>
+		</table>
+	</div>
+	<div id="spinner">
+		<p>LOADING</p>
+	</div>
+	<div id="no-data">
+		<p>NO DATA – ENTER A PLACE OR POSTCODE</p>
+	</div>
+	<!-- Link the script.js file to the HTML file -->
+	<script src="script.js"></script>
 </body>
 
 </html>
