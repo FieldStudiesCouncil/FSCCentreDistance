@@ -109,8 +109,9 @@ window.initMap = function () {
 		},
 	];
 
+	const form = document.querySelector("form");
+	const getDistancesButton = document.querySelector("button[type='submit']");
 	const addressInput = document.getElementById("address");
-	const getDistancesButton = document.getElementById("request");
 	const resultsTable = document.getElementById("results");
 	const spinner = document.getElementById("spinner");
 	const nodata = document.getElementById("no-data");
@@ -128,7 +129,10 @@ window.initMap = function () {
 	const distanceMatrixService = new google.maps.DistanceMatrixService();
 
 	// Add an event listener to the button
-	getDistancesButton.addEventListener("click", () => {
+	form.addEventListener("submit", (event) => {
+		// Don't submit the form
+		event.preventDefault();
+
 		// Grab the value from the address input field
 		const address = addressInput.value;
 
