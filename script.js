@@ -251,9 +251,9 @@ window.initMap = function () {
 	// Add a click listener to the table element
 	table.addEventListener("click", (event) => {
 		// Check if the clicked element is a button element
-		if (event.target.tagName === "BUTTON") {
+		if (event.target.closest("th > button")) {
 			// Get the clicked header
-			const header = event.target.parentElement;
+			const header = event.target.closest("th");
 
 			// Get the column index
 			const index = header.cellIndex;
