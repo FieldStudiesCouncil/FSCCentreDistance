@@ -109,33 +109,31 @@ window.initMap = function () {
 		},
 	];
 
-	// Get the input and table elements by their IDs
-	const postcodeInput = document.getElementById("postcode");
-	postcodeInput.disabled = false;
-
+	const addressInput = document.getElementById("address");
 	const getDistancesButton = document.getElementById("request");
-	getDistancesButton.disabled = false;
-
 	const resultsTable = document.getElementById("results");
-
-	// Create a div element with an id of "spinner"
 	const spinner = document.getElementById("spinner");
 	const nodata = document.getElementById("no-data");
 
-	// Hide the div by default once the script has loaded
+	// Initialise state
+	addressInput.disabled = false;
+	getDistancesButton.disabled = false;
 	spinner.style.display = "none";
 	nodata.style.display = "flex";
 
-	// Create a new DistanceMatrixService object
+	// Create a new DistanceMatrixService object; we're using Google's Distance
+	// Matrix service in the Maps JavaScript API here.
+	// https://developers.google.com/maps/documentation/distance-matrix
+	// https://developers.google.com/maps/documentation/javascript/distancematrix
 	const distanceMatrixService = new google.maps.DistanceMatrixService();
 
-	// Add an event listener to the input element to handle changes
+	// Add an event listener to the button
 	getDistancesButton.addEventListener("click", () => {
-		// Get the value of the input element
-		const postcode = postcodeInput.value;
+		// Grab the value from the address input field
+		const address = addressInput.value;
 
-		// Check if the input is not empty
-		if (!postcode) return;
+		// Check if the input contains a value; if not then return.
+		if (!address) return;
 
 		// Clear the table body
 		resultsTable.tBodies[0].innerHTML = "";
@@ -144,13 +142,15 @@ window.initMap = function () {
 		spinner.style.display = "flex";
 		nodata.style.display = "none";
 
-		// Create an array of origins with only the input value
-		const origins = [postcode];
+		// Create an array of origins with only the input value; DistanceMatrix
+		// takes an array, even if it only contains one element.
+		const origins = [address];
 
 		// Create an array of destinations with only the postcodes of the locations
 		const destinations = locations.map((location) => location.postcode);
 
 		// Define a request object with the origins, destinations, and travel mode
+		// https://developers.google.com/maps/documentation/javascript/distancematrix#distance_matrix_requests
 		const request = {
 			origins: origins,
 			destinations: destinations,
@@ -189,18 +189,22 @@ window.initMap = function () {
 			// Sort the locations array by distance in ascending order
 			locations.sort((a, b) => a.duration?.value - b.duration?.value);
 
-			// Loop through the sorted locations array and create a table row for each location object
+			// Loop through the sorted locations array and create a table row for each
+			// location object
 			for (const location of locations) {
 				// Create a table row element
 				const tr = document.createElement("tr");
 
-				// Create four table cell elements for each property of the location object
+				// Create four table cell elements for each property of the location
+				// object
 				const tdName = document.createElement("td");
 				const tdPostcode = document.createElement("td");
 				const tdDistance = document.createElement("td");
 				const tdDuration = document.createElement("td");
 
-				// Set the text content of each table cell element to the corresponding property value of the location object using template literals
+				// Set the text content and `sort` data attributes of each table cell
+				// element to the corresponding property value of the location object
+				// using template literals
 				tdName.innerHTML = `<a href="${location.url}" target="_blank">${location.name}</a>`;
 				tdName.dataset.sort = `${location.name}`;
 
@@ -235,7 +239,8 @@ window.initMap = function () {
 	// Get the table headers
 	const headers = table.getElementsByTagName("th");
 
-	// Create a map to store the sort direction flags for each header
+	// Create a JavaScript map to store the sort direction flags for each header;
+	// note, this isn't the same thing as a Google Map.
 	const flags = new Map();
 
 	// Initialize the flags to true for ascending order
@@ -245,7 +250,7 @@ window.initMap = function () {
 
 	// Add a click listener to the table element
 	table.addEventListener("click", (event) => {
-		// Check if the clicked element is a header
+		// Check if the clicked element is a button element
 		if (event.target.tagName === "BUTTON") {
 			// Get the clicked header
 			const header = event.target.parentElement;
@@ -315,6 +320,9 @@ window.initMap = function () {
 		}
 	});
 
+	// Implement a current position geocoder using Google Maps Geocoder and the
+	// browser's getCurrentPosition() API
+
 	// Create a geocoder object
 	const geocoder = new google.maps.Geocoder();
 	const marker = document.querySelector(".marker");
@@ -322,29 +330,31 @@ window.initMap = function () {
 	// Get the current location using the Geolocation API
 	async function getCurrentLocation() {
 		try {
-			// Animate the marker to indicate geocoding in progress
+			// Let the user know we're geocoding and disable the input
 			marker.classList.add("marker-animate");
-			// Let the user know we're geocoding
-			postcodeInput.value = "";
-			postcodeInput.placeholder = "Finding location...";
-			// Disable input
-			postcodeInput.disabled = true;
+			addressInput.value = "";
+			addressInput.placeholder = "Finding location...";
+			addressInput.disabled = true;
+
 			// Get the position object using a promise
 			const position = await new Promise((resolve, reject) => {
 				navigator.geolocation.getCurrentPosition(resolve, reject);
 			});
+
 			// Get the latitude and longitude from the position object
 			let { latitude: lat, longitude: lng } = position.coords;
+
 			// Create a LatLng object
 			let latlng = new google.maps.LatLng(lat, lng);
+
 			// Geocode the LatLng object and display the result
 			geocodeLatLng(latlng);
 		} catch (error) {
 			// Handle errors
 			alert(error.message);
 			marker.classList.remove("marker-animate");
-			postcodeInput.placeholder = "Enter place or postcode";
-			postcodeInput.disabled = false;
+			addressInput.placeholder = "Enter place or postcode";
+			addressInput.disabled = false;
 		}
 	}
 
@@ -356,10 +366,13 @@ window.initMap = function () {
 				if (results[0]) {
 					// Display the formatted address of the first result using template literals
 					console.log(`Your location is: ${results[0].formatted_address}`);
+
 					// Put the geocoded address into the input
-					postcodeInput.value = results[0].formatted_address;
+					addressInput.value = results[0].formatted_address;
+
 					// Reenable the input
-					postcodeInput.disabled = false;
+					addressInput.disabled = false;
+
 					// Remove the animation
 					marker.classList.remove("marker-animate");
 				}
