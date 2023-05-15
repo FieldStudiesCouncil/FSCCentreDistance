@@ -1,6 +1,9 @@
 :root {
-	--main: #000;
+	--main: hsl(0, 0%, 10%);
 	--highlight: hsl(168, 85%, 27%);
+	--highlight-50: hsl(168, 85%, 27%, 0.5);
+	--highlight-30: hsl(168, 85%, 27%, 0.3);
+	--highlight-10: hsl(168, 85%, 27%, 0.1);
 }
 
 * {
@@ -8,6 +11,7 @@
 		helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial,
 		sans-serif;
 	box-sizing: border-box;
+	color: var(--main);
 }
 
 html {
@@ -27,7 +31,8 @@ a {
 details {
 	font-size: 0.85em;
 	margin: 0em 0 1em;
-	background-color: hsla(168, 85%, 27%, 0.1);
+	background-color: var(--highlight-10);
+	border: 1px solid var(--highlight-50);
 	padding: 1em 2em;
 }
 
@@ -62,8 +67,15 @@ details > ol > * + * {
 .marker {
 	background-color: transparent;
 	padding: 0;
+	/* margin-right: 0.25em; */
 	border: none;
 	flex: 0 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 1.75em;
+	height: 1.75em;
+	border-radius: 50%;
 }
 
 /* Add some style to the input and table elements */
@@ -83,10 +95,23 @@ input {
 	flex: 3;
 }
 
+button {
+	border: 2px solid var(--main);
+}
+
 input:focus,
-button:focus {
-	outline: 5px solid var(--highlight);
-	border-color: transparent;
+button:focus,
+summary:focus {
+	outline: 4px solid var(--highlight);
+	outline-offset: 0;
+}
+
+.marker:focus {
+	border: 2px solid var(--main);
+}
+
+summary:focus {
+	outline-offset: 0.5em;
 }
 
 input::placeholder {
@@ -117,7 +142,7 @@ table {
 
 th,
 td {
-	border: 1px solid var(--main);
+	border: 2px solid var(--main);
 	padding: 0.25em;
 }
 
@@ -190,7 +215,11 @@ th svg {
 	color: var(--highlight);
 }
 
-.marker > svg:hover {
+.marker > svg > path {
+	color: var(--highlight);
+}
+
+.marker > svg > path:hover {
 	color: var(--main);
 }
 
