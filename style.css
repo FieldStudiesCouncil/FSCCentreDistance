@@ -28,6 +28,15 @@ a {
 	color: var(--highlight);
 }
 
+a.logo {
+	display: inline-block;
+}
+
+a.logo:focus {
+	outline: 4px solid var(--highlight);
+	outline-offset: 0.5em;
+}
+
 details {
 	font-size: 0.85em;
 	margin: 0em 0 1em;
