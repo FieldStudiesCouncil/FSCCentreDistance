@@ -377,8 +377,9 @@ window.initMap = function () {
 					// Reenable the input
 					addressInput.disabled = false;
 
-					// Remove the animation
+					// Remove the animation and reset the placeholder
 					marker.classList.remove("marker-animate");
+					addressInput.placeholder = "Enter place or postcode";
 				}
 			} else {
 				// Geocoder failed
