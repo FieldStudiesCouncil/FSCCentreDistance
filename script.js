@@ -59,7 +59,7 @@ window.initMap = function () {
 		},
 		{
 			name: "London (Bushy Park)",
-			postcode: "TW11 0EQ",
+			postcode: "TW12 2EJ",
 			url: "https://www.field-studies-council.org/locations/london-bushy-park/",
 		},
 		{
@@ -94,17 +94,17 @@ window.initMap = function () {
 		},
 		{
 			name: "Preston Montford",
-			postcode: "SY4 1HW",
+			postcode: "SY4 1DX",
 			url: "https://www.field-studies-council.org/locations/prestonmontford/",
 		},
 		{
 			name: "Rhyd-y-creuau",
-			postcode: "LL24 OET",
+			postcode: "LL24 0HB",
 			url: "https://www.field-studies-council.org/locations/rhydycreuau/",
 		},
 		{
 			name: "Slapton Ley",
-			postcode: "TQ7 OET",
+			postcode: "TQ7 2QP",
 			url: "https://www.field-studies-council.org/locations/slaptonley/",
 		},
 	];
