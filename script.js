@@ -107,6 +107,16 @@ window.initMap = function () {
 			postcode: "TQ7 2QP",
 			url: "https://www.field-studies-council.org/locations/slaptonley/",
 		},
+		{
+			name: "Head Office (Preston Montford)",
+			postcode: "SY4 1HW",
+			url: "https://www.field-studies-council.org/contact-us/",
+		},
+		{
+			name: "Publications",
+			postcode: "TF3 3BB",
+			url: "https://www.field-studies-council.org/shop/",
+		},
 	];
 
 	const form = document.querySelector("form");
