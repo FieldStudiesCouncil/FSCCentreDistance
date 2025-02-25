@@ -177,10 +177,10 @@ window.initMap = function () {
 				// Create a table row element
 				const tr = document.createElement("tr");
 
-				// Create four table cell elements for each property of the location
-				// object
+				// Create five table cell elements for each property of the location object
 				const tdName = document.createElement("td");
 				const tdPostcode = document.createElement("td");
+				const tdRegion = document.createElement("td"); // New cell for Region
 				const tdDistance = document.createElement("td");
 				const tdDuration = document.createElement("td");
 
@@ -193,6 +193,9 @@ window.initMap = function () {
 				tdPostcode.textContent = `${location.postcode}`;
 				tdPostcode.dataset.sort = `${location.postcode}`;
 
+				tdRegion.textContent = `${location.region}`; // Set the Region text content
+				tdRegion.dataset.sort = `${location.region}`; // Set the Region sort data
+
 				tdDistance.textContent = `${location.distance?.text}`;
 				tdDistance.dataset.sort = `${location.distance?.value}`;
 
@@ -202,6 +205,7 @@ window.initMap = function () {
 				// Append each table cell element to the table row element
 				tr.appendChild(tdName);
 				tr.appendChild(tdPostcode);
+				tr.appendChild(tdRegion); // Append the new Region cell
 				tr.appendChild(tdDistance);
 				tr.appendChild(tdDuration);
 
