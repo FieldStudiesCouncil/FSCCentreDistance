@@ -57,7 +57,7 @@ window.initMap = function () {
 		},
 		{
 			name: "Preston Montford",
-			region: "West Midlands (Shropshire)",
+			region: "West Midlands",
 			postcode: "SY4 1DX",
 			url: "https://www.field-studies-council.org/venue-hire-our-residential-centres/#:~:text=Preston%20Montford%20%E2%80%93%20Shropshire",
 		},
