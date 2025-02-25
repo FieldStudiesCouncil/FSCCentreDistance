@@ -57,6 +57,11 @@ window.initMap = function () {
 			postcode: "LL24 0HB",
 			url: "https://www.field-studies-council.org/locations/rhydycreuau/",
 		},
+		{
+			name: "Slapton Ley",
+			postcode: "TQ7 2QP",
+			url: "https://www.field-studies-council.org/locations/slaptonley/",
+		},
 	];
 
 	const form = document.querySelector("form");
