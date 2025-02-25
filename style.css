@@ -42,7 +42,7 @@ details {
 	margin: 0em 0 1em;
 	background-color: var(--highlight-10);
 	border: 1px solid var(--highlight-50);
-	padding: 1em 2em;
+	padding: 1em;
 }
 
 summary {
