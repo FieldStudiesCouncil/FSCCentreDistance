@@ -231,7 +231,8 @@ window.initMap = function () {
 
 	// Initialize the flags to true for ascending order
 	for (const header of headers) {
-		flags.set(header, true);
+		const isTravelTime = /travel time/i.test(header.textContent.trim());
+		flags.set(header, !isTravelTime); // true for others, false for 'Travel time'
 	}
 
 	// Add a click listener to the table element
